@@ -31,7 +31,7 @@ public class UserListUseCase
     public void SearchUser(string name)
     {
         var user = _userRepository.GetUserByName(name);
-        Console.WriteLine(user != null ? user.ToString() : "Usuário não encontrado.");
+        Console.WriteLine($"Nenhum usuário encontrado com o nome: '{name}'.");
     }
 
 }

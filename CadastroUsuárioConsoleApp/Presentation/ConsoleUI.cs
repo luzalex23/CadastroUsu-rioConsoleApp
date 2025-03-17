@@ -21,60 +21,77 @@ public class ConsoleUI
 
     public void Run()
     {
-        Console.WriteLine("\nSelecione uma opção:");
-        Console.WriteLine("1 - Cadastrar usuário");
-        Console.WriteLine("2 - Listar usuários");
-        Console.WriteLine("3 - Buscar usuário por nome");
-        Console.WriteLine("4 - Sair");
-        Console.Write("Opção: ");
-        string option = Console.ReadLine();
-
-        switch (option)
+        while (true) // Loop infinito para manter o menu ativo
         {
-            case "1":
-                RegisterUser();
-                break;
-            case "2":
-                _userListUseCase.ListUsers();
-                break;
-            case "3":
-                SearchUser();
-                break;
-            case "4":
-                Environment.Exit(0);
-                break;
-            default:
-                Console.WriteLine("Opção inválida.");
-                break;
+            Console.WriteLine("\nSelecione uma opção:");
+            Console.WriteLine("1 - Cadastrar usuário");
+            Console.WriteLine("2 - Listar usuários");
+            Console.WriteLine("3 - Buscar usuário por nome");
+            Console.WriteLine("4 - Sair");
+            Console.Write("Opção: ");
+            string option = Console.ReadLine();
+
+            switch (option)
+            {
+                case "1":
+                    RegisterUser();
+                    break;
+                case "2":
+                    ListUsers();
+                    break;
+                case "3":
+                    SearchUser();
+                    break;
+                case "4":
+                    Console.WriteLine("Saindo do programa. Até mais!");
+                    return; // Encerra o programa
+                default:
+                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    break;
+            }
         }
-
-
     }
+
+
+    
 
     private void RegisterUser()
     {
-        Console.Write("Nome: ");
-        string? name = Console.ReadLine();
-
-        Console.Write("E-mail: ");
-        string? email = Console.ReadLine();
-
-        Console.Write("Idade: ");
-        if (int.TryParse(Console.ReadLine(), out int age))
+        while (true)
         {
-            if (name != null && email != null)
+            Console.Write("Nome: ");
+            string? name = Console.ReadLine();
+
+            Console.Write("E-mail: ");
+            string? email = Console.ReadLine();
+
+            Console.Write("Idade: ");
+            if (int.TryParse(Console.ReadLine(), out int age))
             {
-                _userAddUseCase.RegisterUser(name, email, age);
+                try
+                {
+                    _userAddUseCase.RegisterUser(name, email, age);
+                    Console.WriteLine("Usuário cadastrado com sucesso!");
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
             else
             {
-                Console.WriteLine("Nome ou e-mail inválido. O cadastro foi cancelado.");
+                Console.WriteLine("Idade inválida. O cadastro foi cancelado.");
             }
+            ListUsers();
+            Console.Write("Deseja cadastrar outro usuário? (S/N): ");
+            if (Console.ReadLine()?.Trim().ToUpper() != "S") break;
         }
-        else
-        {
-            Console.WriteLine("Idade inválida. O cadastro foi cancelado.");
-        }
+    }
+
+    private void ListUsers()
+    {
+        Console.WriteLine("\nLista de Usuários:");
+        _userListUseCase.ListUsers();
     }
 
     private void SearchUser()

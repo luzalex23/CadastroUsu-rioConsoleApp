@@ -3,7 +3,10 @@ using CadastroUsuárioConsoleApp.Core.Usecases.Register;
 using CadastroUsuárioConsoleApp.Infrastructure.Repositories;
 using CadastroUsuárioConsoleApp.Presentation;
 
-var userListUseCase = new UserListUseCase(new InMemoryUserRepository());
-var userAddUseCase = new UserAddUseCase(new InMemoryUserRepository());
+var connectionString = "Data Source=users.db;";
+var userRepository = new SQLiteUserRepository(connectionString);
+
+var userListUseCase = new UserListUseCase(userRepository);
+var userAddUseCase = new UserAddUseCase(userRepository);
 var consoleUI = new ConsoleUI(userListUseCase, userAddUseCase);
 consoleUI.Run();
