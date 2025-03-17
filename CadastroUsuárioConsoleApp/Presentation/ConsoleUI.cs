@@ -21,17 +21,45 @@ public class ConsoleUI
         _userAddUseCase = userAddUseCase;
         _userUpdateUseCase = userUpdateUseCase;
     }
+    /*Método para imprimir o título centralizado*/
+    void PrintTitle(string title)
+    {
+        Console.Clear();
+        Console.ForegroundColor = ConsoleColor.Cyan;
 
+        PrintCentered("============================");
+        PrintCentered($"      {title}      ");
+        PrintCentered("============================");
+
+        Console.ResetColor();
+    }
+    /*Método para imprimir texto centralizado*/
+    void PrintCentered(string text)
+    {
+        int windowWidth = Console.WindowWidth;
+        int textLength = text.Length;
+        int leftPadding = (windowWidth - textLength) / 2;
+
+        Console.WriteLine($"{new string(' ', leftPadding)}{text}");
+    }
     public void Run()
     {
         while (true) // Loop infinito para manter o menu ativo
         {
-            Console.WriteLine("\nSelecione uma opção:");
-            Console.WriteLine("1 - Cadastrar usuário");
-            Console.WriteLine("2 - Listar usuários");
-            Console.WriteLine("3 - Buscar usuário por nome");
-            Console.WriteLine("4 - Atualizar usuário ");
-            Console.WriteLine("5 - Sair");
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            PrintCentered("============================");
+            PrintCentered("      MENU PRINCIPAL      ");
+            PrintCentered("============================");
+            Console.ResetColor();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            PrintCentered("1 - Cadastrar usuário");
+            PrintCentered("2 - Listar usuários");
+            PrintCentered("3 - Buscar usuário por nome");
+            PrintCentered("4 - Atualizar usuário");
+            PrintCentered("5 - Sair");
+            Console.ResetColor();
             Console.Write("Opção: ");
             string ?option = Console.ReadLine();
 
@@ -56,10 +84,15 @@ public class ConsoleUI
                     Console.WriteLine("Opção inválida. Tente novamente.");
                     break;
             }
+            Console.WriteLine("\nPressione qualquer tecla para voltar ao menu...");
+            Console.ReadKey(); // Aguarda o usuário pressionar uma tecla antes de limpar a tela
         }
     }
     private void RegisterUser()
     {
+        Console.Clear();
+        PrintTitle("CADASTRO DE USUÁRIO");
+
         while (true)
         {
             Console.Write("Nome: ");
@@ -74,67 +107,84 @@ public class ConsoleUI
                 try
                 {
                     _userAddUseCase.RegisterUser(name, email, age);
+                    Console.WriteLine("\nUsuário cadastrado com sucesso!");
                 }
                 catch (ArgumentException ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine($"{ex.Message}");
                 }
             }
             else
             {
                 Console.WriteLine("Idade inválida. O cadastro foi cancelado.");
             }
-            Console.Write("Deseja cadastrar outro usuário? (S/N): ");
+
+            Console.Write("\nDeseja cadastrar outro usuário? (S/N): ");
             if (Console.ReadLine()?.Trim().ToUpper() != "S") break;
         }
     }
 
     private void ListUsers()
     {
-        Console.WriteLine("\nLista de Usuários:");
+        Console.Clear();
+        PrintTitle("LISTAR USUÁRIOS");
+
+        Console.ForegroundColor = ConsoleColor.Blue;
         _userListUseCase.ListUsers();
+        Console.ResetColor();
+
     }
 
     private void SearchUser()
     {
-        Console.Write("Digite o nome do usuário: ");
+        Console.Clear();
+        PrintTitle("BUSCAR USUÁRIO POR NOME");
+
+        Console.WriteLine("Digite o nome do usuário: ");
         string name = Console.ReadLine();
         var users = _userListUseCase.SearchUser(name);
 
         if (users.Count == 0)
         {
-            Console.WriteLine($"Nenhum usuário encontrado com o nome: '{name}'.");
+            Console.ForegroundColor = ConsoleColor.Red;
+            PrintCentered($"Nenhum usuário encontrado com o nome: '{name}'.");
+            Console.ResetColor();
             return;
         }
 
         foreach (var user in users)
         {
-            Console.WriteLine(user);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            PrintCentered($"Nome: {user.Name}, E-mail: {user.Email},Idade: {user.Age}");
+            Console.ResetColor();
         }
     }
     private void UpdateUser()
     {
-        Console.Write("\n✏ Digite o nome do usuário atual: ");
+        Console.Clear();
+        PrintTitle("ATUALIZAR USUÁRIO");
+
+        Console.Write("\nDigite o nome do usuário atual: ");
         string? currentName = Console.ReadLine()?.Trim();
         if (string.IsNullOrWhiteSpace(currentName))
         {
-            Console.WriteLine("⚠ Nome inválido.");
+            PrintCentered("Nome inválido.");
             return;
         }
 
         var users = _userListUseCase.SearchUser(currentName);
         if (users.Count == 0)
         {
-            Console.WriteLine($"❌ Nenhum usuário encontrado com o nome '{currentName}'.");
+            PrintCentered($"Nenhum usuário encontrado com o nome '{currentName}'.");
             return;
         }
 
         if (users.Count > 1)
         {
-            Console.WriteLine("\nVários usuários encontrados:");
+            PrintCentered("\nVários usuários encontrados:");
             for (int i = 0; i < users.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {users[i]}");
+                PrintCentered($"{i + 1}. {users[i]}");
             }
 
             Console.Write("\nDigite o número do usuário que deseja atualizar: ");

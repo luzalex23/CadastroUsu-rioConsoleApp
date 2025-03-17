@@ -10,20 +10,29 @@ public class UserListUseCase
     {
         _userRepository = userRepository;
     }
+    /*Método para imprimir texto centralizado*/
+    void PrintCentered(string text)
+    {
+        int windowWidth = Console.WindowWidth;
+        int textLength = text.Length;
+        int leftPadding = (windowWidth - textLength) / 2;
+
+        Console.WriteLine($"{new string(' ', leftPadding)}{text}");
+    }
     /*Aqui Filtra todos usuáris*/
     public void ListUsers()
     {
         var users = _userRepository.GetUsers();
         if (users.Count == 0)
         {
-            Console.WriteLine("Nenhum usuário cadastrado.");
+            PrintCentered("Nenhum usuário cadastrado.");
             return;
         }
 
-        Console.WriteLine("\nLista de Usuários:");
+        PrintCentered("\nLista de Usuários:");
         foreach (var user in users)
         {
-            Console.WriteLine(user);
+            PrintCentered($"Nome: {user.Name}, E-mail: {user.Email},Idade: {user.Age}");
         }
     }
 
