@@ -36,7 +36,7 @@ A aplicação segue o conceito de **Clean Architecture**, garantindo separação
 
 ## **📦 Como Rodar a Aplicação**
 
-1. Certifique-se de ter o **.NET SDK** instalado na máquina.
+1. Certifique-se de ter o **.NET SDK** instalado na máquina (usei a versão 9 do .NET).
 2. Clone ou baixe este repositório:
    ```bash
    git clone https://github.com/luzalex23/CadastroUsuarioConsoleApp.git
