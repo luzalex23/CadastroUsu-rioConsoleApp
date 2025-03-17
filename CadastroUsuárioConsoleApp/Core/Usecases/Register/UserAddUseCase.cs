@@ -1,4 +1,4 @@
-﻿using CadastroUsuárioConsoleApp.Core.Entities;
+﻿using CadastroUsuarioConsoleApp.Core.Entities;
 using CadastroUsuarioConsoleApp.Core.Interfaces;
 
 namespace CadastroUsuarioConsoleApp.Core.Usecases.Register;
@@ -20,7 +20,7 @@ public class UserAddUseCase
 
         var user = new User(name, email, age);
         _userRepository.AddUser(user);
-        Console.WriteLine("Usuário cadastrado com sucesso!");
+        Console.WriteLine($"Usuário '{name}' cadastrado com sucesso!");
     }
 
 }

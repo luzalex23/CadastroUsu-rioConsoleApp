@@ -1,4 +1,5 @@
-﻿using CadastroUsuarioConsoleApp.Core.Interfaces;
+﻿using CadastroUsuarioConsoleApp.Core.Entities;
+using CadastroUsuarioConsoleApp.Core.Interfaces;
 
 namespace CadastroUsuarioConsoleApp.Core.Usecases.Filter;
 /*Use case para caso de uso referente a busca de usuários*/
@@ -28,10 +29,10 @@ public class UserListUseCase
 
 
     /*Aqui Filtra um usuário pelo nome*/
-    public void SearchUser(string name)
+    public List<User> SearchUser(string name)
     {
-        var user = _userRepository.GetUserByName(name);
-        Console.WriteLine($"Nenhum usuário encontrado com o nome: '{name}'.");
+        return _userRepository.GetUserByName(name);
+
     }
 
 }

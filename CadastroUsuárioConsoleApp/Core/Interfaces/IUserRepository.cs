@@ -5,6 +5,7 @@ namespace CadastroUsuarioConsoleApp.Core.Interfaces;
 public interface IUserRepository
 {
     void AddUser(User user);
+    void UpdateUser(string currentName, string newName, string newEmail, int newAge);
     List<User> GetUsers();
-    User GetUserByName(string name);
+    List<User> GetUserByName(string name);
 }
