@@ -1,12 +1,12 @@
-﻿using CadastroUsuárioConsoleApp.Core.Usecases.Filter;
-using CadastroUsuárioConsoleApp.Core.Usecases.Register;
+﻿using CadastroUsuarioConsoleApp.Core.Usecases.Filter;
+using CadastroUsuarioConsoleApp.Core.Usecases.Register;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CadastroUsuárioConsoleApp.Presentation;
+namespace CadastroUsuarioConsoleApp.Presentation;
 
 public class ConsoleUI
 {
@@ -53,7 +53,7 @@ public class ConsoleUI
     }
 
 
-    
+
 
     private void RegisterUser()
     {

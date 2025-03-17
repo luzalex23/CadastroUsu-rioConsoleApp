@@ -1,7 +1,7 @@
 ﻿using CadastroUsuárioConsoleApp.Core.Entities;
-using CadastroUsuárioConsoleApp.Core.Interfaces;
+using CadastroUsuarioConsoleApp.Core.Interfaces;
 
-namespace CadastroUsuárioConsoleApp.Core.Usecases.Register;
+namespace CadastroUsuarioConsoleApp.Core.Usecases.Register;
 /*Use case para registrar umnovo usuário, aqui validamos alguns dados como idade por exemplo*/
 public class UserAddUseCase
 {

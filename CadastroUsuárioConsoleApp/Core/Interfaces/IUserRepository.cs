@@ -1,6 +1,6 @@
-﻿using CadastroUsuárioConsoleApp.Core.Entities;
+﻿using CadastroUsuarioConsoleApp.Core.Entities;
 
-namespace CadastroUsuárioConsoleApp.Core.Interfaces;
+namespace CadastroUsuarioConsoleApp.Core.Interfaces;
 
 public interface IUserRepository
 {

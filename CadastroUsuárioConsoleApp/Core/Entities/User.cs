@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CadastroUsuárioConsoleApp.Core.Entities;
+namespace CadastroUsuarioConsoleApp.Core.Entities;
 
 public class User
 {

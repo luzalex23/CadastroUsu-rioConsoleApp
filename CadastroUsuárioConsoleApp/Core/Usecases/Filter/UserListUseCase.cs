@@ -1,6 +1,6 @@
-﻿using CadastroUsuárioConsoleApp.Core.Interfaces;
+﻿using CadastroUsuarioConsoleApp.Core.Interfaces;
 
-namespace CadastroUsuárioConsoleApp.Core.Usecases.Filter;
+namespace CadastroUsuarioConsoleApp.Core.Usecases.Filter;
 /*Use case para caso de uso referente a busca de usuários*/
 public class UserListUseCase
 {
@@ -25,7 +25,7 @@ public class UserListUseCase
             Console.WriteLine(user);
         }
     }
-    
+
 
     /*Aqui Filtra um usuário pelo nome*/
     public void SearchUser(string name)

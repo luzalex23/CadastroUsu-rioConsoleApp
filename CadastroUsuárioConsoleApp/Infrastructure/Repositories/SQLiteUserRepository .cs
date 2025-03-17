@@ -1,8 +1,8 @@
-﻿using CadastroUsuárioConsoleApp.Core.Entities;
-using CadastroUsuárioConsoleApp.Core.Interfaces;
+﻿using CadastroUsuarioConsoleApp.Core.Entities;
+using CadastroUsuarioConsoleApp.Core.Interfaces;
 using Microsoft.Data.Sqlite;
 
-namespace CadastroUsuárioConsoleApp.Infrastructure.Repositories;
+namespace CadastroUsuarioConsoleApp.Infrastructure.Repositories;
 
 public class SQLiteUserRepository : IUserRepository
 {
